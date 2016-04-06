@@ -56,7 +56,7 @@ namespace NUnit.Framework.Internal.Commands
         {
             if (fixtureType != null)
             {
-                if (context.TestObject == null && !IsStaticClass(fixtureType))
+                if ((context.TestObject == null || context.GetType() != fixtureType) && !IsStaticClass(fixtureType))
                     context.TestObject = Reflect.Construct(fixtureType, arguments);
 
                 foreach (MethodInfo method in  Reflect.GetMethodsWithAttribute(fixtureType, typeof(TestFixtureSetUpAttribute), true))
